@@ -61,26 +61,26 @@ class RabinKarpINT{
 
 class RabinKarpCHAR{
     public:
-    int fHash(char* p, int m, int q) 
+    int fHash(char* p, int m, int d, int q) 
     {
         int h = 0;
         for (int i = 0; i < m; i++)
         {
-            h = (10 * h + p[i]) % q; //obliczanue hasha na podstawie kodu ASCII
+            h = (d * h + p[i]) % q; //obliczanue hasha na podstawie kodu ASCII
         }
         return h;
     }
 
     void Rabin_Karp(char* text, int n, char* wzorzec, int m, int d, int q)
     {
-        int p = fHash(wzorzec, m, q);
-        int t = fHash(text, m, q); //obliczanie hasha dla okna tekstu o długosci wzorca
+        int p = fHash(wzorzec, m, d, q);
+        int t = fHash(text, m, d, q); //obliczanie hasha dla okna tekstu o długosci wzorca
         int base = 1; //base=d^0
 
         //wyliczamy największą potęgę podstawy (dla przesunięcia hasha)
         for (int i = 1; i < m; i++)
         {
-            base = (base * d) % q; //base=d^(m-1)%13
+            base = (base * d) % q; //base=d^(m-1)%q
         }
         //cout<<base<<endl;
 
@@ -92,7 +92,7 @@ class RabinKarpCHAR{
             {
                 for (i = 0; i < m && text[s + i] == wzorzec[i]; ++i)
                 {
-                    //porównywanie tych znaków
+                    //porównywanie tych znaków jak w naiwnym
                 }
                 if (i == m)
                 {

@@ -7,8 +7,8 @@ class KMP{
     int* tabS(char* wzor, int m)
     {
         int* S = new int[m]; //tablica prefiksow
-        S[0] = 0; //pierwszy element zawsze 0
-        int k = 0; //dlugosc aktualnego prefiksu
+        S[0] = 0; //pierwszy element zawsze 0, bo jeden znak
+        int k = 0; //dlugosc aktualnego prefiksu, który jest jednoczesnie sufiksem
         for (int i = 1; i < m; i++)
         {
             while (wzor[k] != wzor[i] && k > 0)
@@ -44,7 +44,7 @@ class KMP{
             {
                 cout<<"Pozycja: "<<(i-m+1)<<endl; //pozycja gdzie znaleziono dopasowanie
                 znaleziono = true;
-                k=tabP[k-1]; //szukanie kolejnego dopasowania (trzeba przerobic)
+                k=tabP[k-1]; //szukanie kolejnego dopasowania 
             }
         }
         if(znaleziono == false)
