@@ -20,16 +20,16 @@ class KMP{
                 k++; //zwiekszenie dlugosci dopasowania
             }
             S[i] = k; //zapisanie aktualnego wyniku dlugosci dopasowania prefiksu
-            cout<<wzor[i]<<", " << k << endl;
+            //cout<<wzor[i]<<", " << k << endl;
         }
         return S;
     }
 
-    int KMPfun(char* text, int n, char* wzor, int m)
+    void KMPfun(char* text, int n, char* wzor, int m)
     {
-        int* tabP = new int[m]; 
-        tabP = tabS(wzor, m); //tablica prefiksow
+        int* tabP = tabS(wzor, m); //tablica prefiksow
         int k = 0; //ilosc dopasowanych znakow
+        bool znaleziono = false;
         for(int i=0; i<n;i++)
         {
             while(k>0 && wzor[k]!=text[i])
@@ -42,11 +42,16 @@ class KMP{
             }
             if(k==m)
             {
-                return (i-m+1); //pozycja gdzie znaleziono dopasowanie
-                //k=tabP[k-1]; //szukanie kolejnego dopasowania (trzeba przerobic)
+                cout<<"Pozycja: "<<(i-m+1)<<endl; //pozycja gdzie znaleziono dopasowanie
+                znaleziono = true;
+                k=tabP[k-1]; //szukanie kolejnego dopasowania (trzeba przerobic)
             }
         }
-        return -1;
+        if(znaleziono == false)
+        {
+            cout<<"Nie znaleziono wzorca"<<endl;
+        }
+        delete [] tabP;
     }
 
     void test()
@@ -54,8 +59,8 @@ class KMP{
         char p[] = "ababababca";
         char text[] = "bacbababaaababababcababccaababababca";
         int m = strlen(p);
-        tabS(p, m);
+        //tabS(p, m);
         int n = strlen(text);
-        cout<<KMPfun(text, n, p, m)<<endl;
+        KMPfun(text, n, p, m);
     }
 };

@@ -4,27 +4,34 @@ using namespace std;
 
 class Naiwny{
 public:
-    int naiwny(char* text, int n, char* wzorzec, int m)
+    void naiwny(char* text, int n, char* wzorzec, int m)
     {
+        bool znaleziono = false;
         for (int s = 0, end = n - m + 1; s < end; s++)
         {
             int i;
             for (i = 0; i < m && text[s + i] == wzorzec[i]; ++i)
             {
-                
+                //porównywanie znaków
             }
             if (i == m)
             {
-                return s;
+                cout<<"Pozycja: "<<s<<endl;;
+                znaleziono = true;
             }
         }
-        return -1;
+        if(znaleziono == false)
+        {
+            cout<<"Nie znaleziono wzorca"<<endl;
+        }
     }
     void test()
     {
-        char textC[] = "abcabbaabababaabc";
-        char tabC[] = "abaabc";
-        cout << naiwny(textC, 17, tabC, 5) << endl;
+        char textC[] = "bacbababaaababababcababccaababababca";
+        char tabC[] = "ababababca";
+        int n = strlen(textC);
+        int m = strlen(tabC);
+        naiwny(textC, n, tabC, m);
     }
 };
 
